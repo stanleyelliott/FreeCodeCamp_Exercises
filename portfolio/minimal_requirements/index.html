@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Portfolio</title>
+  <meta name="description" content="">
+  <meta name="author" content="Stanley Elliott">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <style>
+  	.portfolio-item {
+		padding:10px;
+		margin-bottom:32px;
+	}
+	.portfolio-item  a {
+		text-decoration:none;
+		font-size:1.3em;
+	}
+	.profile-pic {
+		width:100%;
+		height:200px;
+		border-radius:5%;
+		max-width:200px;
+		margin:auto;
+		display:block;
+		}
+	.profile-name {
+	  text-align:center;font-size:24px;
+	}
+	.profile-column {
+		max-width:400px;
+		margin:auto;
+	}
+	.project-details {
+	font-weight:bold;	
+	}
+	.project-name {
+	font-size:1.2em;
+	}
+	.page-title {
+	font-size:32px;	
+	}
+	.my-navbar {
+	display:flex;
+	flex-wrap:wrap;
+	min-height:0px;
+	justify-content:center;
+	text-align:center;
+	flex-direction:column;
+	margin-bottom:20px;
+	margin-top:10px;
+	}
+	.navlink {
+		display:block;
+		border-right:1px solid black;
+		border-bottom:1px solid black;
+		border-left:1px solid black;
+		margin-bottom:0px;
+		padding:0 15px;
+		font-size:18px;
+	} 
+	.navitem:first-child .navlink {
+	border-top:1px solid black;
+	border-radius: 20px 20px 0px 0px;
+	border-left:1px solid black;
+	border-left:1px solid black;
+	border-rigtht:1px solid black;
+	}
+	.navitem:last-child .navlink {
+	border-right:1px solid black;
+	border-radius:0 0 10px 10px;
+	}
+	@media (min-width:400px) {
+			.my-navbar {
+					flex-direction:row;
+					flex-wrap:nowrap;
+			}
+			.navlink {
+				border-radius:0px;
+			}
+			.navitem:first-child .navlink {
+					border-top:0px solid black;
+					border-radius:0 0 0 10px;
+			}
+			.navitem:last-child .navlink {
+					border-top:0px solid black;
+					border-radius:0 0 10px 0px;
+			}
+	}
+	#bio {
+	padding-top:10px;
+	}
+	.divider {
+	   width:0px;
+	   margin:3px;
+	   background-color:black;
+	}
+	.navitem {
+
+	}
+	.container {
+	max-width:960px;	
+	}
+	div:target {
+	animation-name:mymove;
+	animation-duration:3s;	
+	}
+	@keyframes mymove {
+    0%   {background-color:white;border-radius:10px;}
+    50%  {background-color:rgb(240,240,140);20px;}
+    100% {background-color:white;border-radius:20px;}
+	}
+	.my-navbarbox {
+		border-bottom:1px solid black;
+		margin-bottom:10px;
+		background-color:white;
+		margin-bottom:30px;
+	}
+	img {
+	max-width:100%;	
+	width:100%;
+	}
+	
+  </style>
+</head>
+<body>
+
+
+  <div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+		    <div class="my-navbar">
+				<div class="navitem">
+					<a class="navlink" href="#bio">About</a>
+				</div>
+				<div class="navitem">
+					<a class="navlink" href="#projects">Portfolio</a>
+				</div>
+				<div class="navitem">
+					<a class="navlink" href="#contacts">Contact</a>
+				</div>
+			</div>
+		</div>
+	</div>
+    <div class="row">
+      <div class="col-xs-12 col-md-3" >
+		  <div class="profile-column">
+		  <div id="bio">
+	<img class="profile-pic" src="images/profile_picture.png"></img>
+	<h5 class="profile-name">User Person</h5>
+<div class="profile-description">
+        <p>My little personal slogan or description. Hello I am User blah Person. I am interested in things that are surprising. I keep an air of mystery about me.</p>
+	</div>
+	<div id="contacts">
+		<ul class="profile-socialmedia">
+			<li>Email</li>
+			<li>Github</li>
+			<li>LinkedIn</li>
+			<li>Blog</li>
+			
+	</div>
+	</div>
+      </div>
+      </div>
+     <div class="col-xs-12 col-md-9" id="projects" >
+     	<div class="page-title">My Projects</div>
+	<div class="portfolio-item">
+			<a href="#project"><div class="project-name">Project Name</div>
+				<img src="https://placehold.it/640x150"></img></a>
+				<div class="project-summary">
+				<div class="project-details">Date Published - Language - Project Type</div>
+				<div class="project-description">
+				A short description of the project 
+				</div>
+				</div>
+	</div>
+<div class="portfolio-item">
+			<a href="#project"><div class="project-name">Project Name</div>
+				<img src="https://placehold.it/640x150"></img></a>
+				<div class="project-summary">
+				<div class="project-details">Date Published - Language - Project Type</div>
+				<div class="project-description">
+				A short description of the project 
+				</div>
+				</div>
+	</div>
+<div class="portfolio-item">
+			<a href="#project"><div class="project-name">Project Name</div>
+				<img src="https://placehold.it/640x150"></img></a>
+				<div class="project-summary">
+				<div class="project-details">Date Published - Language - Project Type</div>
+				<div class="project-description">
+				A short description of the project 
+				</div>
+				</div>
+	</div>
+	<div class="portfolio-item">
+			<a href="#project"><div class="project-name">Project Name</div>
+				<img src="https://placehold.it/640x150"></img></a>
+				<div class="project-summary">
+				<div class="project-details">Date Published - Language - Project Type</div>
+				<div class="project-description">
+				A short description of the project 
+				</div>
+				</div>
+	</div>
+	</div>
+	
+     </div>
+    </div>
+  </div>
+</body>
+</html>
