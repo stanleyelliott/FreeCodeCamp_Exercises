@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Quote Machine</title>
+  <meta name="description" content="">
+  <meta name="author" content="Stanley Elliott">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+	  .container {
+	display:flex;
+	justify-content:center;
+	}
+	.quotebox {
+	margin:auto;
+	max-width:500px;
+	width:100%;
+	border-left:3px solid black;
+	padding:30px;	
+	}
+	.quotemark {
+		font-size:1.5em;
+	}
+	.quote {
+		font-size:1.5em;
+	}
+	.source {
+			text-align:left;
+	}
+	.quotebox {
+			max-width:480px;
+			margin:auto;
+	}
+	.socialmedia-icon, .quotebox, .button {
+			border:1px solid rgb(0,0,0);
+			border-radius:5px;
+	}
+	.button {
+		padding:5px;
+	}
+	.button:hover {
+		border:2px solid black;
+		padding:4px;
+	}
+	.socialmedia-icon {
+			width:32px;
+			height:32px;
+			border-radius:5px;
+			margin-left:5px;
+			margin-right:5px;
+			display:inline-block;
+			border:1px solid black;
+	}
+	.socialmedia-icon {
+		padding:2px;
+	}
+	.socialmedia-icon:hover {
+		border:2px solid black;
+		padding:1px;
+	}
+	body {
+	font-family:sans-serif;	
+	}
+	.hypen {
+		font-weight:bold;
+		display:inline-block;
+		margin-right:5px;
+	}
+	.sourceContainer {
+	text-align:right;
+	}
+	.buttonContainer {
+		display:flex;
+		justify-content:space-between;
+		flex-direction:row;
+		margin-top:30px;	
+	}
+  </style>
+  <script>
+  QuotesList = [
+	["HUMANS NEED FANTASY TO BE HUMAN. TO BE THE PLACE WHERE THE FALLING ANGEL MEETS THE RISING APE.","Death, Terry Pratchett's Hogfather"],
+	["Sometimes it is better to light a flamethrower than curse the darkness.","Terry Pratchett"],
+	["The world always seems brighter when you've just made something that wasn't there before.","Neil Gaiman"],
+	["The first principle is that you must not fool yourself and you are the easiest person to fool.","Richard Feynman"],
+	["For a successful technology, reality must take precedence over public relations, for Nature cannot be fooled.","Richard Feynman"],
+	["People focus on role models; it is more effective to find antimodels - people you don't want to resemble when you grow up","Nassim Taleb"],
+	["“You may never know what type of person someone is unless they are given opportunities to violate moral or ethical codes.”","Nassim Taleb"],
+	["The purpose of a storyteller is not to tell you how to think, but to give you questions to think upon.","Brandon Sanderson"],
+	["...A man can only stumble for so long before he either falls or stands up straight.","Brandon Sanderson"],
+	["The place where you made your stand never mattered. Only that you were there... and still on your feet.","Steven King"],
+	["The secret of getting ahead is getting started.","Mark Twain"],
+	["A man cannot be comfortable without his own approval.","Mark Twain"],
+	["Whenever you see a successful person you only see the public glories, never the private sacrifices to reach them.", "Vaibhav Shah"],
+	["A successful man is one who can lay a firm foundation with the bricks others have thrown at him.", "David Brinkley"],
+	["No one can make you feel inferior without your consent.", "Eleanor Roosevelt"],
+	["If you can't explain it simply, you don't understand it well enough.", "Albert Einstein"],
+	["Success is the sum of small efforts, repeated day-in and day-out.", "Robert Collier"],
+	["The first step toward success is taken when you refuse to be a captive of the environment in which you first find yourself.", "Mark Caine"],
+	["Success does not consist in never making mistakes but in never making the same one a second time.", "George Bernard Shaw"],
+  ];
+  
+  
+  </script>
+  <script src="vue.js"></script>
+</head>
+<body>
+	<div class="container" id="quotegenerator">
+		<div class="quotebox">
+			<div class="quotation" style="display:flex;flex-direction:column;">
+				<div class="quote">
+					<span class="quotemark leftquotemark">"</span>{{quoteText}}</span><span class="quotemark rightquote">"</span>
+				</div>
+		        <div class="sourceContainer">
+					<span class="hypen">-</span><span class="source">{{quoteSource}}</span>
+				</div>
+			</div>
+			<div class="buttonContainer">
+				<div class="social">
+					<a v-bind:href="twitterUrl"><img class="socialmedia-icon" src="twitterlogo.png"></a>
+				</div>
+			<div>
+			<div class="button" id="newQuote" v-on:click="randomQuote()">New Quote</div>
+		</div>
+	</div>
+	<script>
+	var quoteGenerator = new Vue({
+		el: "#quotegenerator",
+		data: {
+				quoteText:"",
+				quoteSource:"",
+				quotes: QuotesList,
+		},
+		methods: {
+				randomQuote: function() {
+				var i = Math.floor(Math.random()*this.quotes.length);
+				var q = this.quotes[i];
+				this.quoteText = q[0];
+				this.quoteSource = q[1];
+				}
+		},
+		computed: {
+				twitterUrl: function() {
+					var msg = "\"" + this.quoteText + " -" + this.quoteSource;
+					var uri  = encodeURIComponent(msg);
+					return "https://twitter.com/intent/tweet?text=" + uri;
+				}
+		}
+		
+	});
+	quoteGenerator.randomQuote();
+	</script>
+	
+</body>
+</html>
