@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Quote Machine</title>
+  <meta name="description" content="">
+  <meta name="author" content="Stanley Elliott">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+	.weatherbox {
+	margin:auto;
+	display:inline-block;
+	border:1px solid black;
+	padding:30px;
+	border-radius:5px;
+	margin:auto;
+}
+.coords {
+		display:table;
+}
+div {
+padding:5px;
+}
+.centerContainer {
+display:flex;
+justify-content:center;	
+}
+  </style>
+  <script src="vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="skycons.js"></script>
+</head>
+<body>
+	<div class="centerContainer">
+	<div class="container" id="weatherapp">
+		<div class="weatherbox" id="weatherapp">
+			<div id="vueweather">
+			<table class="coords">
+				<tr>
+			<th>Longitude</th><th><span v-if="longitude === null">Not Found</span><span v-else>{{longitude}}</span></th>
+			</tr>
+			<tr>
+			<th>Latitude</th><th><span v-if="latitude === null">Not Found</span><span v-else>{{latitude}}</span></th>
+			</tr>
+			</table>
+			<div>
+			Temperature: {{temperatureMessage}}
+			</div>
+			<input type="radio" name="format" value="C" checked v-model="tempFormat">Celsius<br>
+			<input type="radio" name="format" value="F" v-model="tempFormat">Fahrenheit<br>
+			</div>
+			<canvas id="w" width="64" height="64"></canvas> 
+			<!-- Note the canvas doesn't render the icons when inside vue for some strange reason -->
+			<br>
+			<a href="https://darksky.net/poweredby/">Powered by Dark Sky</a>
+	</div>
+	</div>
+	</div>
+	<script>
+	var icons = new Skycons({color:"black",resizeClear:true});
+	</script>
+	<script>
+	var weatherapp = new Vue({
+		el: "#vueweather",
+		data: {
+			displayFormat:"F",
+			crossOriginUrl: "http://crossorigin.me",
+			darkSkyUrl:"https://api.darksky.net/forecast",
+			k:[!+[]+!+[]]+[!+[]+!+[]+!+[]+!+[]+!+[]+!+[]],
+			e:"f6719c6df0534e9323793bbba9ec",
+			y:[+[]]+[!+[]+!+[]],
+			latitude:null,
+			longitude:null,
+			summary:null,
+			icon:null,
+			tempFormat:"C",
+			temperature:null,
+		},
+		methods: {
+			updatePosition: function() {
+			var a = this;
+			navigator.geolocation.getCurrentPosition(function(pos) {
+				a.latitude = pos.coords.latitude;
+				a.longitude = pos.coords.longitude;
+				a.updateWeather();
+				})
+			},
+			updateWeather: function() {
+					var url = this.crossOriginUrl + "/" + this.apiRequestUrl + this.latitude + "," + this.longitude;
+					url = url + "?" + "units=si";
+					console.log(url);
+					var a = this;
+					axios.get(url)
+						.then(function (response) {
+							console.log(response);
+							var currently = response.data.currently
+							a.summary = currently.summary;
+							a.temperature = currently.temperature;
+							a.icon = currently.icon;
+							icons.add("w",a.icon);
+							icons.play();
+						})
+						.catch(function (error) {
+							console.log(error);
+						});
+			}
+		},
+		computed: {
+				geolocationIsAvailable: function() {
+						return ("geolocation" in navigator);
+				},
+				apikey: function() {
+						return this.k + this.e + this.y;
+				},
+				apiRequestUrl: function() {
+						return this.darkSkyUrl + "/" + this.apikey + "/"
+				},
+				temperatureMessage: function() {
+						if (!(this.temperature===null)) {
+						if (this.tempFormat=="F") {
+							return (this.temperature*(9/5)+32).toFixed(2) + "°F";
+						} else if (this.tempFormat=="C") {
+								return this.temperature +"°C";
+						}
+						}else {
+							return "Not found";
+						}
+				}
+		}
+		
+	});
+	weatherapp.updatePosition();
+	</script>
+	
+</body>
+</html>
